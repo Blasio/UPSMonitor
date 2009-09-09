@@ -26,10 +26,21 @@
                 txtFreq.Text = "Freq = " & Mid(strBuff, 24, 4) & " Hz"
                 txtVoltageBatt.Text = "VBatt = " & Mid(strBuff, 29, 4) & " v"
                 txtTemp.Text = "Temp = " & Mid(strBuff, 34, 4) & " ºC"
-                txtStatus.Text = strBuff
+                If strBuff.Substring(41, 1) = "1" Then
+                    txtStatus.Text = "UPS Failure"
+                ElseIf strBuff.Substring(39, 1) = "1" Then
+                    txtStatus.Text = "Battery Low"
+                ElseIf strBuff.Substring(38, 1) = "1" Then
+                    txtStatus.Text = "Power Failed"
+                ElseIf strBuff.Substring(40, 1) = "1" Then
+                    txtStatus.Text = "UPS in Boost/Buck Mode"
+                Else
+                    txtStatus.Text = "UPS & Power OK"
+                End If
 
+                NotifyIcon1.Text = "UPSMonitor: " & txtStatus.Text
                 bWaiting = False
-            End If
+                End If
         End If
     End Sub
 

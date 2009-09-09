@@ -24,8 +24,6 @@ Partial Class frmMonitor
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Me.txtVoltageIn = New System.Windows.Forms.TextBox
-        Me.txtBrownOut = New System.Windows.Forms.TextBox
-        Me.txtSpike = New System.Windows.Forms.TextBox
         Me.txtVoltageOut = New System.Windows.Forms.TextBox
         Me.txtLoadPcnt = New System.Windows.Forms.TextBox
         Me.txtFreq = New System.Windows.Forms.TextBox
@@ -41,20 +39,6 @@ Partial Class frmMonitor
         Me.txtVoltageIn.Name = "txtVoltageIn"
         Me.txtVoltageIn.Size = New System.Drawing.Size(100, 20)
         Me.txtVoltageIn.TabIndex = 0
-        '
-        'txtBrownOut
-        '
-        Me.txtBrownOut.Location = New System.Drawing.Point(118, 12)
-        Me.txtBrownOut.Name = "txtBrownOut"
-        Me.txtBrownOut.Size = New System.Drawing.Size(100, 20)
-        Me.txtBrownOut.TabIndex = 1
-        '
-        'txtSpike
-        '
-        Me.txtSpike.Location = New System.Drawing.Point(224, 12)
-        Me.txtSpike.Name = "txtSpike"
-        Me.txtSpike.Size = New System.Drawing.Size(100, 20)
-        Me.txtSpike.TabIndex = 2
         '
         'txtVoltageOut
         '
@@ -95,7 +79,7 @@ Partial Class frmMonitor
         '
         Me.txtStatus.Location = New System.Drawing.Point(12, 168)
         Me.txtStatus.Name = "txtStatus"
-        Me.txtStatus.Size = New System.Drawing.Size(312, 20)
+        Me.txtStatus.Size = New System.Drawing.Size(159, 20)
         Me.txtStatus.TabIndex = 8
         '
         'tmrPoll
@@ -103,20 +87,25 @@ Partial Class frmMonitor
         Me.tmrPoll.Enabled = True
         Me.tmrPoll.Interval = 1000
         '
+        'NotifyIcon1
+        '
+        Me.NotifyIcon1.Text = "NotifyIcon1"
+        Me.NotifyIcon1.Visible = True
+        '
         'frmMonitor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(328, 194)
+        Me.ClientSize = New System.Drawing.Size(181, 194)
         Me.Controls.Add(Me.txtStatus)
         Me.Controls.Add(Me.txtTemp)
         Me.Controls.Add(Me.txtVoltageBatt)
         Me.Controls.Add(Me.txtFreq)
         Me.Controls.Add(Me.txtLoadPcnt)
         Me.Controls.Add(Me.txtVoltageOut)
-        Me.Controls.Add(Me.txtSpike)
-        Me.Controls.Add(Me.txtBrownOut)
         Me.Controls.Add(Me.txtVoltageIn)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.MaximizeBox = False
         Me.Name = "frmMonitor"
         Me.Text = "UPSMonitor"
         Me.ResumeLayout(False)
@@ -124,8 +113,6 @@ Partial Class frmMonitor
 
     End Sub
     Friend WithEvents txtVoltageIn As System.Windows.Forms.TextBox
-    Friend WithEvents txtBrownOut As System.Windows.Forms.TextBox
-    Friend WithEvents txtSpike As System.Windows.Forms.TextBox
     Friend WithEvents txtVoltageOut As System.Windows.Forms.TextBox
     Friend WithEvents txtLoadPcnt As System.Windows.Forms.TextBox
     Friend WithEvents txtFreq As System.Windows.Forms.TextBox
