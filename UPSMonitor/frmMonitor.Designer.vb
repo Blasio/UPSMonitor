@@ -100,6 +100,7 @@ Partial Class frmMonitor
         '
         'tmrPoll
         '
+        Me.tmrPoll.Enabled = True
         Me.tmrPoll.Interval = 1000
         '
         'frmMonitor

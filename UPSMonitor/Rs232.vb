@@ -825,7 +825,7 @@ Public Class Rs232
                         Throw New ApplicationException( _
                             "Write Error - Bytes Written " & _
                             iBytesWritten.ToString & " of " & _
-                            Buffer.Length.ToString)
+                            Buffer.Length.ToString & " GetLastError = " & GetLastError())
                     End If
                 End If
             Catch Ex As Exception
