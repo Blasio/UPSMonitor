@@ -2,6 +2,7 @@
 
     Private WithEvents COMPort As New Rs232
     Private bWaiting As Boolean
+    Public Delegate Sub InvokeDelegate()
 
     Private Sub tmrPoll_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrPoll.Tick
 
@@ -50,8 +51,34 @@
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        COMPort.Open(1, 2400, 8, Rs232.DataParity.Parity_None, Rs232.DataStopBit.StopBit_1, 4096)
 
     End Sub
 
+    Private Sub NotifyIcon1_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles NotifyIcon1.DoubleClick
+        Me.Visible = True
+        Me.WindowState = FormWindowState.Normal
+    End Sub
+
+    Private Sub frmMonitor_Resize(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Resize
+        If Me.WindowState = FormWindowState.Minimized Then
+            Me.Visible = False
+        End If
+    End Sub
+
+    Private Sub frmMonitor_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        COMPort.Open(1, 2400, 8, Rs232.DataParity.Parity_None, Rs232.DataStopBit.StopBit_1, 4096)
+        NotifyIcon1.Icon = Me.Icon
+        NotifyIcon1.Text = "UPSMonitor"
+        Me.BeginInvoke(New InvokeDelegate(AddressOf Me.HideForm))
+    End Sub
+
+    Private Sub HideForm()
+        Me.Visible = False
+    End Sub
+
+    Private Sub frmMonitor_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
+        If e.CloseReason = CloseReason.UserClosing Then
+            If MsgBox("Are you sure you want to close UPSMonitor?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo) = MsgBoxResult.No Then e.Cancel = True
+        End If
+    End Sub
 End Class

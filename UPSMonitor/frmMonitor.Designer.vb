@@ -31,6 +31,7 @@ Partial Class frmMonitor
         Me.txtTemp = New System.Windows.Forms.TextBox
         Me.txtStatus = New System.Windows.Forms.TextBox
         Me.tmrPoll = New System.Windows.Forms.Timer(Me.components)
+        Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.SuspendLayout()
         '
         'txtVoltageIn
@@ -120,5 +121,6 @@ Partial Class frmMonitor
     Friend WithEvents txtTemp As System.Windows.Forms.TextBox
     Friend WithEvents txtStatus As System.Windows.Forms.TextBox
     Friend WithEvents tmrPoll As System.Windows.Forms.Timer
+    Friend WithEvents NotifyIcon1 As System.Windows.Forms.NotifyIcon
 
 End Class
