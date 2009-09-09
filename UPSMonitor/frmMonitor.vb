@@ -1,7 +1,7 @@
 ﻿Public Class frmMonitor
 
     Private WithEvents COMPort As New Rs232
-    Private bWaiting As Boolean
+    Private bWaiting As Boolean, bShuttingDown As Boolean
     Public Delegate Sub InvokeDelegate()
 
     Private Sub tmrPoll_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrPoll.Tick
@@ -31,6 +31,10 @@
                     txtStatus.Text = "UPS Failure"
                 ElseIf strBuff.Substring(39, 1) = "1" Then
                     txtStatus.Text = "Battery Low"
+                    If Not bShuttingDown Then
+                        System.Diagnostics.Process.Start("shutdown", "/s /f /p /d u:6:12")
+                        bShuttingDown = True
+                    End If
                 ElseIf strBuff.Substring(38, 1) = "1" Then
                     txtStatus.Text = "Power Failed"
                 ElseIf strBuff.Substring(40, 1) = "1" Then
