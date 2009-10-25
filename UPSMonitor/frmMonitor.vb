@@ -32,7 +32,7 @@
                 ElseIf strBuff.Substring(39, 1) = "1" Then
                     txtStatus.Text = "Battery Low"
                     If Not bShuttingDown Then
-                        System.Diagnostics.Process.Start("shutdown", "/s /f /p /d u:6:12")
+                        System.Diagnostics.Process.Start("shutdown", "/f /p /d 6:12")
                         bShuttingDown = True
                     End If
                 ElseIf strBuff.Substring(38, 1) = "1" Then
