@@ -3,8 +3,10 @@
     Private WithEvents COMPort As New Rs232
     Private bWaiting As Boolean, bShuttingDown As Boolean
     Public Delegate Sub InvokeDelegate()
+    Private strLogFilePath As String
 
     Private Sub tmrPoll_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrPoll.Tick
+        Static strOldStatus As String
 
         If COMPort.IsOpen Then
             If Not bWaiting Then
@@ -27,6 +29,7 @@
                 txtFreq.Text = "Freq = " & Mid(strBuff, 24, 4) & " Hz"
                 txtVoltageBatt.Text = "VBatt = " & Mid(strBuff, 29, 4) & " v"
                 txtTemp.Text = "Temp = " & Mid(strBuff, 34, 4) & " ºC"
+
                 If strBuff.Substring(41, 1) = "1" Then
                     txtStatus.Text = "UPS Failure"
                 ElseIf strBuff.Substring(39, 1) = "1" Then
@@ -43,8 +46,14 @@
                     txtStatus.Text = "UPS & Power OK"
                 End If
 
-                NotifyIcon1.Text = "UPSMonitor: " & txtStatus.Text
+                If strOldStatus <> txtStatus.Text Then
+                    strOldStatus = txtStatus.Text
+                    Call mLogEvent(txtStatus.Text)
+                    NotifyIcon1.Text = "UPSMonitor: " & txtStatus.Text
+                End If
+
                 bWaiting = False
+
                 End If
         End If
     End Sub
@@ -73,6 +82,8 @@
         COMPort.Open(1, 2400, 8, Rs232.DataParity.Parity_None, Rs232.DataStopBit.StopBit_1, 4096)
         NotifyIcon1.Icon = Me.Icon
         NotifyIcon1.Text = "UPSMonitor"
+        strLogFilePath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\UPSMonitor\Events.log"
+        Call mLogEvent("Starting Up")
         Me.BeginInvoke(New InvokeDelegate(AddressOf Me.HideForm))
     End Sub
 
@@ -84,5 +95,18 @@
         If e.CloseReason = CloseReason.UserClosing Then
             If MsgBox("Are you sure you want to close UPSMonitor?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo) = MsgBoxResult.No Then e.Cancel = True
         End If
+
+        If Not e.Cancel Then mLogEvent("Shutting Down (Reason: " & e.CloseReason & ")")
+    End Sub
+
+    Private Sub mLogEvent(ByVal strEvent As String)
+        Dim mFile As System.IO.StreamWriter
+        Dim strLine As String
+
+        strLine = Format(Now, "yyyyMMdd hhmmss") & ": " & strEvent
+        mFile = System.IO.File.AppendText(strLogFilePath)
+        mFile.WriteLine(strLine)
+        mFile.Close()
+
     End Sub
 End Class
