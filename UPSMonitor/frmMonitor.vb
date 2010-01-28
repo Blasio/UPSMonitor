@@ -4,9 +4,11 @@
     Private bWaiting As Boolean, bShuttingDown As Boolean
     Public Delegate Sub InvokeDelegate()
     Private strLogFilePath As String
+    Private strPowerLogPath As String
 
     Private Sub tmrPoll_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrPoll.Tick
         Static strOldStatus As String
+        Static iCnt As Integer, iPLoad As Integer
 
         If COMPort.IsOpen Then
             If Not bWaiting Then
@@ -26,6 +28,12 @@
                 txtVoltageIn.Text = "VIn = " & Mid(strBuff, 2, 5) & " v"
                 txtVoltageOut.Text = "VOut = " & Mid(strBuff, 14, 5) & " v"
                 txtLoadPcnt.Text = "Load = " & Mid(strBuff, 20, 3) & "%"
+
+                If tsmiLogging.Checked Then
+                    iPLoad += CInt(Mid(strBuff, 20, 3))
+                    iCnt += 1
+                End If
+
                 txtFreq.Text = "Freq = " & Mid(strBuff, 24, 4) & " Hz"
                 txtVoltageBatt.Text = "VBatt = " & Mid(strBuff, 29, 4) & " v"
                 txtTemp.Text = "Temp = " & Mid(strBuff, 34, 4) & " ºC"
@@ -54,7 +62,14 @@
 
                 bWaiting = False
 
-                End If
+            End If
+
+            If iCnt = 30 Then
+                mLogAverageLoad(iPLoad / 30)
+                iPLoad = 0
+                iCnt = 0
+            End If
+
         End If
     End Sub
 
@@ -82,7 +97,8 @@
         COMPort.Open(1, 2400, 8, Rs232.DataParity.Parity_None, Rs232.DataStopBit.StopBit_1, 4096)
         NotifyIcon1.Icon = Me.Icon
         NotifyIcon1.Text = "UPSMonitor"
-        strLogFilePath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\UPSMonitor\Events.log"
+        strPowerLogPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\UPSMonitor\"
+        strLogFilePath = strPowerLogPath & "\Events.log"
         Call mLogEvent("Starting Up")
         Me.BeginInvoke(New InvokeDelegate(AddressOf Me.HideForm))
     End Sub
@@ -110,6 +126,19 @@
 
     End Sub
 
+    Private Sub mLogAverageLoad(ByVal dblLoadAvg As Double)
+        Dim mFile As System.IO.StreamWriter
+        Dim strFileName As String
+        Dim strLine As String
+
+        strFileName = Format(Now(), "yyyyMMdd") & ".log"
+        strLine = Format(Now(), "HHmmss") & " " & Format(dblLoadAvg, "0.00")
+        mFile = System.IO.File.AppendText(strPowerLogPath & "\" & strFileName)
+        mFile.WriteLine(strLine)
+        mFile.Close()
+
+    End Sub
+
     Private Sub tsmiShow_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles tsmiShow.Click
         If Not Me.Visible Then
             Me.Visible = True
@@ -121,4 +150,7 @@
         Me.Close()
     End Sub
 
+    Private Sub tsmiLogging_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles tsmiLogging.Click
+        tsmiLogging.Checked = Not tsmiLogging.Checked
+    End Sub
 End Class

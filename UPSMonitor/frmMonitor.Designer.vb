@@ -36,6 +36,8 @@ Partial Class frmMonitor
         Me.tsmiShow = New System.Windows.Forms.ToolStripMenuItem
         Me.tsmiQuit = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator
+        Me.tsmiLogging = New System.Windows.Forms.ToolStripMenuItem
         Me.cmsIconMenu.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -101,7 +103,7 @@ Partial Class frmMonitor
         '
         'cmsIconMenu
         '
-        Me.cmsIconMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiShow, Me.ToolStripSeparator1, Me.tsmiQuit})
+        Me.cmsIconMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiShow, Me.ToolStripSeparator1, Me.tsmiLogging, Me.ToolStripSeparator2, Me.tsmiQuit})
         Me.cmsIconMenu.Name = "cmsIconMenu"
         Me.cmsIconMenu.Size = New System.Drawing.Size(153, 82)
         '
@@ -121,6 +123,17 @@ Partial Class frmMonitor
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         Me.ToolStripSeparator1.Size = New System.Drawing.Size(149, 6)
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(149, 6)
+        '
+        'tsmiLogging
+        '
+        Me.tsmiLogging.Name = "tsmiLogging"
+        Me.tsmiLogging.Size = New System.Drawing.Size(152, 22)
+        Me.tsmiLogging.Text = "Log Power Use"
         '
         'frmMonitor
         '
@@ -155,6 +168,8 @@ Partial Class frmMonitor
     Friend WithEvents cmsIconMenu As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents tsmiShow As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents tsmiLogging As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents tsmiQuit As System.Windows.Forms.ToolStripMenuItem
 
 End Class
