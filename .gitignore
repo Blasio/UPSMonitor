@@ -1,5 +1,4 @@
 *~
-*.exe
-*.obj
+*.suo
 UPSMonitor/obj/*
 UPSMonitor/bin/*
