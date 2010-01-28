@@ -32,6 +32,11 @@ Partial Class frmMonitor
         Me.txtStatus = New System.Windows.Forms.TextBox
         Me.tmrPoll = New System.Windows.Forms.Timer(Me.components)
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
+        Me.cmsIconMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.tsmiShow = New System.Windows.Forms.ToolStripMenuItem
+        Me.tsmiQuit = New System.Windows.Forms.ToolStripMenuItem
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator
+        Me.cmsIconMenu.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtVoltageIn
@@ -90,8 +95,32 @@ Partial Class frmMonitor
         '
         'NotifyIcon1
         '
+        Me.NotifyIcon1.ContextMenuStrip = Me.cmsIconMenu
         Me.NotifyIcon1.Text = "NotifyIcon1"
         Me.NotifyIcon1.Visible = True
+        '
+        'cmsIconMenu
+        '
+        Me.cmsIconMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiShow, Me.ToolStripSeparator1, Me.tsmiQuit})
+        Me.cmsIconMenu.Name = "cmsIconMenu"
+        Me.cmsIconMenu.Size = New System.Drawing.Size(153, 82)
+        '
+        'tsmiShow
+        '
+        Me.tsmiShow.Name = "tsmiShow"
+        Me.tsmiShow.Size = New System.Drawing.Size(152, 22)
+        Me.tsmiShow.Text = "Show"
+        '
+        'tsmiQuit
+        '
+        Me.tsmiQuit.Name = "tsmiQuit"
+        Me.tsmiQuit.Size = New System.Drawing.Size(152, 22)
+        Me.tsmiQuit.Text = "Quit"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(149, 6)
         '
         'frmMonitor
         '
@@ -109,6 +138,7 @@ Partial Class frmMonitor
         Me.MaximizeBox = False
         Me.Name = "frmMonitor"
         Me.Text = "UPSMonitor"
+        Me.cmsIconMenu.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -122,5 +152,9 @@ Partial Class frmMonitor
     Friend WithEvents txtStatus As System.Windows.Forms.TextBox
     Friend WithEvents tmrPoll As System.Windows.Forms.Timer
     Friend WithEvents NotifyIcon1 As System.Windows.Forms.NotifyIcon
+    Friend WithEvents cmsIconMenu As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents tsmiShow As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents tsmiQuit As System.Windows.Forms.ToolStripMenuItem
 
 End Class

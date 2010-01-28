@@ -109,4 +109,16 @@
         mFile.Close()
 
     End Sub
+
+    Private Sub tsmiShow_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles tsmiShow.Click
+        If Not Me.Visible Then
+            Me.Visible = True
+            Me.WindowState = FormWindowState.Normal
+        End If
+    End Sub
+
+    Private Sub tsmiQuit_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles tsmiQuit.Click
+        Me.Close()
+    End Sub
+
 End Class
