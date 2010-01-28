@@ -103,7 +103,7 @@
         Dim mFile As System.IO.StreamWriter
         Dim strLine As String
 
-        strLine = Format(Now, "yyyyMMdd hhmmss") & ": " & strEvent
+        strLine = Format(Now, "yyyyMMdd HHmmss") & ": " & strEvent
         mFile = System.IO.File.AppendText(strLogFilePath)
         mFile.WriteLine(strLine)
         mFile.Close()
