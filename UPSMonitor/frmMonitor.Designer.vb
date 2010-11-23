@@ -34,10 +34,10 @@ Partial Class frmMonitor
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.cmsIconMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.tsmiShow = New System.Windows.Forms.ToolStripMenuItem
-        Me.tsmiQuit = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator
         Me.tsmiLogging = New System.Windows.Forms.ToolStripMenuItem
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator
+        Me.tsmiQuit = New System.Windows.Forms.ToolStripMenuItem
         Me.cmsIconMenu.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -105,7 +105,7 @@ Partial Class frmMonitor
         '
         Me.cmsIconMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiShow, Me.ToolStripSeparator1, Me.tsmiLogging, Me.ToolStripSeparator2, Me.tsmiQuit})
         Me.cmsIconMenu.Name = "cmsIconMenu"
-        Me.cmsIconMenu.Size = New System.Drawing.Size(153, 82)
+        Me.cmsIconMenu.Size = New System.Drawing.Size(153, 104)
         '
         'tsmiShow
         '
@@ -113,27 +113,29 @@ Partial Class frmMonitor
         Me.tsmiShow.Size = New System.Drawing.Size(152, 22)
         Me.tsmiShow.Text = "Show"
         '
-        'tsmiQuit
-        '
-        Me.tsmiQuit.Name = "tsmiQuit"
-        Me.tsmiQuit.Size = New System.Drawing.Size(152, 22)
-        Me.tsmiQuit.Text = "Quit"
-        '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         Me.ToolStripSeparator1.Size = New System.Drawing.Size(149, 6)
+        '
+        'tsmiLogging
+        '
+        Me.tsmiLogging.Checked = True
+        Me.tsmiLogging.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.tsmiLogging.Name = "tsmiLogging"
+        Me.tsmiLogging.Size = New System.Drawing.Size(152, 22)
+        Me.tsmiLogging.Text = "Log Power Use"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         Me.ToolStripSeparator2.Size = New System.Drawing.Size(149, 6)
         '
-        'tsmiLogging
+        'tsmiQuit
         '
-        Me.tsmiLogging.Name = "tsmiLogging"
-        Me.tsmiLogging.Size = New System.Drawing.Size(152, 22)
-        Me.tsmiLogging.Text = "Log Power Use"
+        Me.tsmiQuit.Name = "tsmiQuit"
+        Me.tsmiQuit.Size = New System.Drawing.Size(152, 22)
+        Me.tsmiQuit.Text = "Quit"
         '
         'frmMonitor
         '
